@@ -1,0 +1,26 @@
+# editorconfig.org  editorconfig的官网
+
+# 设置之后就不会在继续查找editorconfig文件了，这就是一个最上层的editorconfig文件，底下的文件有运用它的规则
+root = true
+
+# [*] 文件的通配符，表示下面的规则运用于所有的文件
+[*]
+
+# 编码格式为 utf8
+charset = utf-8
+
+# 代码的缩进尺寸 为2个空格
+indent_size = 2
+
+# 空格替换为缩进
+indent_style = space
+
+# 每一个文件保存后以一个空白行结尾
+insert_final_newline = true
+
+# 会去除换行行首的字符
+trim_trailing_whitespace = true
+
+# 对README文件单独配置，不去除行首的空白符
+[*.md]
+trim_trailing_whitespace = false

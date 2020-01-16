@@ -111,15 +111,46 @@ plugins:[
 * *for webpack 3* 及以下
 
   * 对于webpack3及以下，可以安装这个插件`extract-text-webpack-plugin` 
-  * ![image-20200116164958296](/Users/cyj/Library/Application Support/typora-user-images/image-20200116164958296.png)
+
+  * ```javascript
+    // for webpack 3
+    npm install --save-dev extract-text-webpack-plugin
+    // for webpack 2
+    npm install --save-dev extract-text-webpack-plugin@2.1.2
+    // for webpack 1
+    npm install --save-dev extract-text-webpack-plugin@1.0.1
+    ```
 
 * *for webpack 4 及以上可以使用*  `mini-css-extract-plugin` 把生成css提取出来放到html中去
 
   * npm install --save-dev mini-css-extract-plugin
 
-  * ![image-20200116170041988](/Users/cyj/Library/Application Support/typora-user-images/image-20200116170041988.png)
+  * ```javascript
+    {
+      test:/\.css$/i,
+      use:[
+        {
+          loader:MiniCssExtractPlugin.loader,
+          options:{
+            esModule: true,
+          }
+        },
+        'css-loader'
+      ]
+    }
+    ```
 
-  * ![image-20200116170131820](/Users/cyj/Library/Application Support/typora-user-images/image-20200116170131820.png)
+    
+
+  * ``` javascript
+    plugins:[
+      new MiniCssExtractPlugin({
+        filename:'[name].css',
+        chunFilename:'[id].css',
+        ignoreOrder: false
+      })
+    ]
+    ```
 
   * [ mini-extract-plugin 插件详情 ]:https://www.npmjs.com/package/mini-css-extract-plugin	"）"
 
@@ -182,7 +213,21 @@ plugins:[
 
 * 在webpack.config.js中的rules的use最后添加 *postcss-loader* 
 
-  * ![image-20200116202415465](/Users/cyj/Library/Application Support/typora-user-images/image-20200116202415465.png)
+  * ```javascript
+    {
+      test:/\.css$/i,
+      use:[
+        {
+          loader:MiniCssExtractPlugin.loader,
+          options:{
+            esModule: true
+          }
+        },
+        'css-loader',
+        'postcss-loader'
+      ]
+    }
+    ```
 
 * 创建 *postcss.config.js* 
 
@@ -204,10 +249,26 @@ plugins:[
 * file-loader npm i file-loader -D
 
 * webpack.config.js中配置一个新的规则
-  * ![image-20200116205744601](/Users/cyj/Library/Application Support/typora-user-images/image-20200116205744601.png)
+
+  * ```js
+    {
+      test:/\.(png|jpg|jpeg|gif)$/i,
+      ues:[
+        loader:'file-loader',
+        options:{
+        	name:"img/[name].[ext]",
+        	publicPath:"/"
+        }
+      ]
+    }
+    ```
+
   * 需要启动http服务才能查看，使用webpack-dev-server，publicPath配置为根路径
+
 * 使用 url-loader
+
 * 配置新的规则
+
   * loader:'url-loader' limit: 1024 
   * 如果图片大小 小于limit的限制，将把图片转化为base64位，这是与file-loader的区别
 
@@ -228,6 +289,18 @@ plugins:[
 * 将ES6新及语法转换为低级语法，兼容大多数浏览器
 
 * `npm install -D babel-loader @babel/core @babel/preset-env` 
+
+### 6. 其他文件
+
+* robots.txt 
+  * 
+
+  ```txt
+  User-agent: * 
+  Disallow: /admin/
+  ```
+
+* humans.txt
 
 ## 六. loader
 
